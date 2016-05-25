@@ -10,4 +10,18 @@ describe DockingStation do
 		expect(bike).to be_working
 	end
 
+	it 'responds to dock' do
+		expect(subject).to respond_to :dock
+	end
+
+	it 'accepts an argument' do
+		expect(subject).to respond_to(:dock).with(1).arguments
+	end
+
+  it 'docks a bike' do
+		bike = Bike.new
+		docked_bike = subject.dock(bike)
+  	expect(subject.bike).to eq docked_bike
+  end
+
 end
