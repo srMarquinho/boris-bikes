@@ -19,14 +19,13 @@ describe DockingStation do
 		expect(subject).to respond_to(:dock).with(1).arguments
 	end
 
-  it 'docks a bike' do
-		bike = Bike.new
-    subject.dock(bike)
-  	expect(subject.bike).to eq bike
-  end
+  # it 'docks a bike' do
+	# 	bike = Bike.new
+  # 	expect(subject.dock(bike)).to eq bikes
+  # end
 
    it "has a docked bike" do
-     expect(subject).to respond_to :bike
+     expect(subject).to respond_to :bikes
    end
 
   describe '#release_bike' do
@@ -37,9 +36,8 @@ describe DockingStation do
 
   describe '#dock' do
     it 'cannot return bike if full' do
-      bike = Bike.new
-      subject.dock(bike)
-      expect {subject.dock(bike)}.to raise_error("We have no space!")
+      20.times{ subject.dock(Bike.new)}
+      expect {subject.dock(Bike.new)}.to raise_error("We have no space!")
     end
   end
 end
