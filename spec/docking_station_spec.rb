@@ -6,7 +6,8 @@ describe DockingStation do
 	end
 
 	it 'releases a working bike' do
-		bike = subject.release_bike
+
+    bike = Bike.new
 		expect(bike).to be_working
 	end
 
@@ -28,4 +29,17 @@ describe DockingStation do
      expect(subject).to respond_to :bike
    end
 
+  describe '#release_bike' do
+   it 'doesnt return a bike if empty' do
+     expect {subject.release_bike}.to raise_error("We have no bikes!")
+   end
+  end
+
+  describe '#dock' do
+    it 'cannot return bike if full' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect {subject.dock(bike)}.to raise_error("We have no space!")
+    end
+  end
 end
