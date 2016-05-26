@@ -46,9 +46,17 @@ describe DockingStation do
   #     expect(subject.empty?).to eq true
   #   end
   # end
+
   describe '#initialize' do
     it 'default number of bikes' do
-      expect(DockingStation::DEFAULT_CAPACITY).to eq(20)
+      expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
     end
   end
+
+  # it 'can be reported broken' do
+  #   bike = Bike.new
+  #   expect(bike.report_broken).to be_broken
+  # end
+
+
 end
