@@ -6,10 +6,11 @@ class DockingStation
   attr_accessor :capacity
 
   def release_bike
-    Bike.new
+    fail 'No bikes available' unless @bike
+    @bike
   end
 
-  def docking_bike(bike)
+  def dock(bike)
     raise "sorry, dock is full" if @bike
     @bike = bike
   end
