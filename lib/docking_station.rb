@@ -2,6 +2,8 @@ require_relative 'bike'
 
 class DockingStation
 
+  DEFAULT_CAPACITY = 20
+
   attr_reader :bike
   attr_accessor :capacity
 
@@ -24,7 +26,7 @@ class DockingStation
   end
 
   def full?
-    if @bikes.length >= 20
+    if @bikes.length >= DEFAULT_CAPACITY
       true
     else
       false
