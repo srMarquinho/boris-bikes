@@ -44,5 +44,4 @@ describe DockingStation do
         it { is_expected.to have_attributes(:bikes => []) }
       end
 
-
 end
