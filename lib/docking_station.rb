@@ -14,13 +14,17 @@ class DockingStation
 
 	def release_bike
 		raise "We have no bikes!" if empty?
-    raise "Broken bike!" if @bikes[-1].working? == false
+    raise "We have no working bikes!" if @bikes[-1].working? == false
     @bikes.pop
 	end
 
 	def dock(bike)
     raise "We have no space!" if full?
-    @bikes <<  bike
+     if bike.working?
+       @bikes <<  bike
+     else
+       @bikes.unshift(bike)
+     end
 	end
 
 private

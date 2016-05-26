@@ -34,7 +34,7 @@ describe DockingStation do
         bike = Bike.new
         bike.report_broken
         subject.dock(bike)
-        expect {subject.release_bike}.to raise_error("We have no bikes!")
+        expect {subject.release_bike}.to raise_error(RuntimeError, "We have no working bikes!")
       end
     end
 
