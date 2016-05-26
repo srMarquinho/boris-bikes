@@ -38,4 +38,11 @@ describe DockingStation do
         expect {subject.dock(Bike.new)}.to raise_error("We have no space!")
       end
     end
+
+      describe DockingStation.new do
+        it { is_expected.to have_attributes(:capacity => DockingStation::DEFAULT_CAPACITY) }
+        it { is_expected.to have_attributes(:bikes => []) }
+      end
+
+
 end
