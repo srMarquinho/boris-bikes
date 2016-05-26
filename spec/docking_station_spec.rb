@@ -34,4 +34,16 @@ describe DockingStation do
     end
   end
 
+  # describe '#full?' do
+  #   it 'dock is full' do
+  #     20.times { subject.dock(Bike.new) }
+  #     expect(subject=).to eq true
+  #   end
+  # end
+  #
+  # describe '#empty?' do
+  #   it 'dock is empty' do
+  #     expect(subject.empty?).to eq true
+  #   end
+  # end
 end
