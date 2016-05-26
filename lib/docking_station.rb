@@ -9,13 +9,23 @@ attr_reader :bikes
 	end
 
 	def release_bike
-		raise "We have no bikes!" if @bikes.empty?
+		raise "We have no bikes!" if empty?
     @bikes.pop
 	end
 
 	def dock(bike)
-    raise "We have no space!" if @bikes.length >= 20
+    raise "We have no space!" if full?
     @bikes <<  bike
 	end
+
+private
+
+  def full?
+    @bikes.count >= 20
+  end
+
+  def empty?
+    @bikes.empty?
+  end
 
 end
