@@ -2,16 +2,17 @@ require 'docking_station'
 
 describe DockingStation do
 
+  let(:bike) { double :bike }
 
 	it 'responds to release_bike' do
 		expect(subject).to respond_to :release_bike
 	end
 
-
 	  it 'releases a working bike' do
-     subject.dock Bike.new
-     bike = subject.release_bike
-     expect(bike).to be_working
+    allow(bike).to receive(:working?).and_return(true)
+		subject.dock(bike)
+		released_bike = subject.release_bike
+		expect(released_bike).to be_working
 	 end
 
 	it 'responds to dock' do
@@ -31,28 +32,32 @@ describe DockingStation do
      expect(subject).to respond_to :bikes
   end
 
-    describe '#release_bike' do
-      it 'doesnt return a bike if empty' do
-        expect {subject.release_bike}.to raise_error("We have no bikes!")
-      end
-      it 'doesnt release a broken bike' do
-        allow(bike).to receive(:report_broken).and_return(true)
-        bike.report_broken
-        subject.dock(bike)
-        expect {subject.release_bike}.to raise_error(RuntimeError, "We have no working bikes!")
-      end
+  describe '#release_bike' do
+    it 'doesnt return a bike if empty' do
+      expect {subject.release_bike}.to raise_error("We have no bikes!")
     end
-
-    describe '#dock' do
-      it 'cannot return bike if full' do
-        DockingStation::DEFAULT_CAPACITY.times{ subject.dock(double(:bike))}
-        expect {subject.dock(double(:bike))}.to raise_error("We have no space!")
-      end
+    it 'doesnt release a broken bike' do
+      allow(bike).to receive(:report_broken).and_return(true)
+      bike.report_broken
+      subject.dock(bike)
+      expect {subject.release_bike}.to raise_error(RuntimeError, "We have no working bikes!")
+			# allow(bike).to receive(:working?).and_return(true)
+			# subject.dock(bike)
+			# released_bike = subject.release_bike
+			# expect(released_bike).to be_working
     end
+  end
 
-      describe DockingStation.new do
-        it { is_expected.to have_attributes(:capacity => DockingStation::DEFAULT_CAPACITY) }
-        it { is_expected.to have_attributes(:bikes => []) }
-      end
+  describe '#dock' do
+    it 'cannot return bike if full' do
+      DockingStation::DEFAULT_CAPACITY.times{subject.dock(bike)}
+      expect {subject.dock(bike)}.to raise_error("We have no space!")
+    end
+  end
+
+  describe DockingStation.new do
+    it { is_expected.to have_attributes(:capacity => DockingStation::DEFAULT_CAPACITY) }
+    it { is_expected.to have_attributes(:bikes => []) }
+  end
 
 end
