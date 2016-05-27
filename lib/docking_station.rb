@@ -18,6 +18,11 @@ class DockingStation
     @bikes.pop
 	end
 
+  def release_broken
+    raise "All bikes are working!" if @bikes.all? {|bike| bike.working?}
+    @bikes.shift
+  end
+
 	def dock(bike)
     raise "We have no space!" if full?
      if bike.working?
