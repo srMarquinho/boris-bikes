@@ -1,7 +1,7 @@
 require 'docking_station'
 
 describe DockingStation do
-  let(:bike) { double :bike }
+
 
 	it 'responds to release_bike' do
 		expect(subject).to respond_to :release_bike
@@ -9,10 +9,9 @@ describe DockingStation do
 
 
 	  it 'releases a working bike' do
-      allow(bike).to receive(:working?).and_return(true)
-      subject.dock(bike)
-      released_bike = subject.release_bike
-      expect(released_bike).to be_working
+     subject.dock Bike.new
+     bike = subject.release_bike
+     expect(bike).to be_working
 	 end
 
 	it 'responds to dock' do
@@ -57,4 +56,3 @@ describe DockingStation do
       end
 
 end
-git
