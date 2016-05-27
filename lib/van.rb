@@ -1,4 +1,5 @@
-require_relative 'docking_station', 'bike'
+require_relative 'docking_station'
+
 class Van
 
   def initialize
@@ -15,6 +16,6 @@ class Van
   def collect_fixed
   end
 
-  def deliver_fixedva
+  def deliver_fixed
   end
 end

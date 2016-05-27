@@ -64,7 +64,7 @@ describe DockingStation do
     end
   end
 
-  describe DockingStation.new do
+  describe DockingStation do
     it { is_expected.to have_attributes(:capacity => DockingStation::DEFAULT_CAPACITY) }
     it { is_expected.to have_attributes(:bikes => []) }
   end
