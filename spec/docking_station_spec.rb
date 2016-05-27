@@ -2,7 +2,7 @@ require 'docking_station'
 
 describe DockingStation do
 
-  let(:bike) { double :bike }
+  let(:bike) { double(:bike, ) }
 
 	it 'responds to release_bike' do
 		expect(subject).to respond_to :release_bike
@@ -38,18 +38,16 @@ describe DockingStation do
     end
     it 'doesnt release a broken bike' do
       allow(bike).to receive(:report_broken).and_return(true)
+			allow(bike).to receive(:working?).and_return(false)
       bike.report_broken
       subject.dock(bike)
       expect {subject.release_bike}.to raise_error(RuntimeError, "We have no working bikes!")
-			# allow(bike).to receive(:working?).and_return(true)
-			# subject.dock(bike)
-			# released_bike = subject.release_bike
-			# expect(released_bike).to be_working
     end
   end
 
   describe '#dock' do
     it 'cannot return bike if full' do
+			allow(bike).to receive(:working?).and_return(true)
       DockingStation::DEFAULT_CAPACITY.times{subject.dock(bike)}
       expect {subject.dock(bike)}.to raise_error("We have no space!")
     end
