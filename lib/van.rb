@@ -7,7 +7,6 @@ class Van
 
   def collect_broken(bike)
     @van << bike if bike.working? == false
-    p @van
   end
 
   def deliver_broken
